@@ -21,6 +21,7 @@ local
 
 varmed/settings/settings.py
 varapp/filters/apply_bitwise.html
+resources/dumps/init/basic_info.json
 
 benchmark/results/
 benchmark/stats
