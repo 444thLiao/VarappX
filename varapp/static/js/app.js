@@ -3666,7 +3666,7 @@
             type: r.FILTER_TYPE_CONTINUOUS
         }, {
             group: o,
-            name: "Filterspanel",
+            name: "FiltersPanel",
             field: "genotype",
             invisibleValue: "active",
             type: r.FILTER_TYPE_GENOTYPES
@@ -3737,6 +3737,7 @@
         t.exports = {filters: p, filter_groups: c}
     }, {"../../constants/FilterConstants": 15}],
     29: [function (e, t, n) {
+        //Activate when filter in panel was chosen, it create a line to describe the filter you chosed.
         "use strict";
         var r = e("react"), o = e("../../actions/FilterActions"), i = e("../../constants/FilterConstants"), a = e("lodash"), s = e("../../utils/formatters"), l = e("react-bootstrap"), u = l.Glyphicon, c = {
             ">=": "≥",
@@ -3749,7 +3750,7 @@
                     return void 0 !== e.value && e.value !== e.nullValue && e.value !== e.invisibleValue
                 }).map(function (e) {
                     var t = e.value, n = e.op, r = "";
-                    return e.type === i.FILTER_TYPE_ENUM && (t = t.replace(/_/g, " "), t = t.split(",")), a.isArray(t) ? t.length > 1 ? (n = "∈", t = "(" + t.join(", ") + ")") : (n = "=", t = t[0]) : a.isBoolean(t) ? (t === !1 && (r = "not "), n = "", t = "") : isNaN(parseFloat(t)) ? void 0 === n && (n = ":") : e.type === i.FILTER_TYPE_FREQUENCY ? t = s.formatFrequencyPercent(t) : t % 1 !== 0 && (t = s.roundSignif(t, 3)), n = c[n] || n, [e.field, r + e.name.toLowerCase() + " " + n + " " + t]
+                    return e.type === i.FILTER_TYPE_ENUM && (t = t.replace(/_/g, " "), t = t.split(",")), a.isArray(t) ? t.length > 1 ? (n = "∈", t = "(" + t.join(", ") + ")") : (n = "=", t = t[0]) : a.isBoolean(t) ? (t === !1 && (r = "not "), n = "", t = "") : isNaN(parseFloat(t)) ? void 0 === n && (n = ":") : e.type === i.FILTER_TYPE_FREQUENCY ? t = s.formatFrequencyPercent(t) : t % 1 !== 0 && (t = s.roundSignif(t, 3)), n = c[n] || n, [e.field, r + e.name + " " + n + " " + t]
                 }).value()
             }, render: function () {
                 var e = this, t = this.fctFilterSummary(this.props.filters), n = a.map(t, function (t) {
@@ -3772,6 +3773,7 @@
         "react-bootstrap": 396
     }],
     30: [function (e, t, n) {
+
         "use strict";
         var r = e("react"), o = e("react-addons-pure-render-mixin"), i = e("./kinds/TrueFalseAnyFilter"), a = e("./kinds/ContinuousValueFilter"), s = e("./kinds/EnumFilter"), l = e("./kinds/LocationFilter"), u = e("./kinds/GenotypesFilter"), c = e("./kinds/OneChoiceFilter"), p = e("./FilterSummary"), d = e("../../actions/FilterActions"), f = e("../../actions/VariantActions"), h = e("../../stores/FilterStore"), m = e("../../constants/FilterConstants"), v = e("lodash"), y = e("../login/AuthenticatedComponent"), b = e("../../utils/Api"), g = e("react-bootstrap"), _ = g.Button, E = g.Panel, C = g.Accordion, w = {};
         w[m.FILTER_TYPE_CONTINUOUS] = a, w[m.FILTER_TYPE_FREQUENCY] = a, w[m.FILTER_TYPE_ENUM] = s, w[m.FILTER_TYPE_ONE_CHOICE] = c, w[m.FILTER_TYPE_TRUE_FALSE_ANY] = i, w[m.FILTER_TYPE_GENOTYPES] = u;
