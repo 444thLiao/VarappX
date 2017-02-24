@@ -3666,11 +3666,7 @@
             type: r.FILTER_TYPE_CONTINUOUS
         }, {
             group: o,
-<<<<<<< HEAD
-            name: "FiltersPanel2",
-=======
-            name: "FiltersPanel3",
->>>>>>> Version1.1
+            name: "FiltersPanel",
             field: "genotype",
             invisibleValue: "active",
             type: r.FILTER_TYPE_GENOTYPES
