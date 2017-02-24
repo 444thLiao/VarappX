@@ -3666,7 +3666,7 @@
             type: r.FILTER_TYPE_CONTINUOUS
         }, {
             group: o,
-            name: "FiltersPanel",
+            name: "FiltersPanel3",
             field: "genotype",
             invisibleValue: "active",
             type: r.FILTER_TYPE_GENOTYPES
