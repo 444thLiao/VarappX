@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test inflate</title>
+    <link rel="stylesheet" href="vendor/qunit.css" type="text/css"/>
+
+    <script type="text/javascript" src="vendor/qunit.js"></script>
+
+    <!-- jQuery JS -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="../js/igv-exts.js"></script>
+    <script type="text/javascript" src="../js/igv-utils.js"></script>
+    <script type="text/javascript" src="../js/igv-color.js"></script>
+    <script type="text/javascript" src="../js/fasta.js"></script>
+
+    <script type="text/javascript" src="../js/bam/coverageMap.js"></script>
+    <script type="text/javascript" src="../js/bam/bamSource.js"></script>
+
+    <script type="text/javascript" src="../js/bigwig/bwReader.js"></script>
+    <script type="text/javascript" src="../js/bigwig/bwRPTree.js"></script>
+    <script type="text/javascript" src="../js/bigwig/bwSource.js"></script>
+    <script type="text/javascript" src="../js/bigwig/bufferedReader.js"></script>
+    <script type="text/javascript" src="../js/bigwig/bwTotalSummary.js"></script>
+    <script type="text/javascript" src="../js/bigwig/bwBPTree.js"></script>
+
+    <script type="text/javascript" src="../vendor/inflate.js"></script>
+    <script type="text/javascript" src="../vendor/zlib_and_gzip.min.js"></script>
+
+
+    <script type="text/javascript" src="../js/binary.js"></script>
+    <script type="text/javascript" src="../js/genome.js"></script>
+    <script type="text/javascript" src="../js/set.js"></script>
+    <script type="text/javascript" src="../js/igvxhr.js"></script>
+
+    <script type="text/javascript" src="testBigwig.js"></script>
+
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script type="text/javascript" src="testBAM.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        runBigwigTests();
+    });
+</script>
+</body>
+</html>

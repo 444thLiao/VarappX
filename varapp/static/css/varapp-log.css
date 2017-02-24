@@ -1,0 +1,1 @@
+#log-panel .panel{max-height:180px;overflow-y:auto}#log-panel ul{list-style-type:none;padding:0;margin:0}#log-panel ul li{margin:4px}#log-panel ul li.error{color:red}#log-panel ul li.success{color:green}#log-panel ul li.warning{color:orange}
