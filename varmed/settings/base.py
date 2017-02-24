@@ -141,13 +141,13 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
 # Email
-EMAIL_ADMIN = 'bengyunfu@163.com'
+#EMAIL_ADMIN = ''
 #EMAIL_FROM = 'varapp@varapp.vital-it.ch'
 #EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'bengyunfu@163.com'
-EMAIL_HOST_PASSWORD = 'smtp163test'
-EMAIL_USE_TLS = False
+#EMAIL_PORT = 25
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+#EMAIL_USE_TLS = False
 #EMAIL_USE_SSL
 #EMAIL_TIMEOUT
 #EMAIL_SSL_KEYFILE
