@@ -3597,7 +3597,7 @@
         toastr: 632
     }],
     28: [function (e, t, n) {
-        var r = e("../../constants/FilterConstants"), o = "Scenario", i = "Frequency", a = "Quality", s = "Location", l = "Impact", u = "Pathogenicity", c = [o, i, a, l, u], p = [{
+        var r = e("../../constants/FilterConstants"), o = "FiltersPanel", i = "Frequency", a = "Quality", s = "Location", l = "Impact", u = "Pathogenicity", c = [o, i, a, l, u], p = [{
             group: s,
             name: "location",
             field: "location",
@@ -3666,7 +3666,7 @@
             type: r.FILTER_TYPE_CONTINUOUS
         }, {
             group: o,
-            name: "Scenario",
+            name: "Filterspanel",
             field: "genotype",
             invisibleValue: "active",
             type: r.FILTER_TYPE_GENOTYPES
@@ -4292,7 +4292,8 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["active", "dominant", "recessive", "de_novo", "compound_het", "x_linked"]).map(function (n) {
+                var e = this, t = this.state.value, n = i.chain(["Preset1", "Preset2", "Preset3"]).map(function (n) {
+                    //help to desecribe the panel which is scenario before, but preset/filter_panel now.
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
                         className: "genotypes-filter-choices",
@@ -4306,7 +4307,7 @@
                         onChange: e.onChange
                     }), o.createElement("span", null, " " + s.enumElem(n.replace("active", "none"))), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
                         name: n,
-                        category: "scenario"
+                        category: "Filterspanel"
                     })), o.createElement("small", null, o.createElement("span", {className: "badge count pull-right"}, n.count))))
                 }).value();
                 return o.createElement("div", {className: "one-filter genotypes-filter"}, n)
@@ -5746,6 +5747,7 @@
         "react-bootstrap": 396
     }],
     53: [function (e, t, n) {
+        // Help tp construct icon '?' in panel right.
         "use strict";
         var r = e("react"), o = e("./HelpTooltipDescriptions"), i = e("react-bootstrap"), a = i.Popover, s = i.OverlayTrigger, l = i.Glyphicon, u = r.createClass({
             displayName: "HelpTooltip",
@@ -5776,6 +5778,8 @@
         t.exports = {HelpTooltip: u, WithHelper: c}
     }, {"./HelpTooltipDescriptions": 54, react: 629, "react-bootstrap": 396}],
     54: [function (e, t, n) {
+        //Define left toggled panel for create "?" icon.
+        //When you create a ? icon, the attribute category need in this o.keys.
         "use strict";
         var r = e("../../../../resources/descriptions"), o = {
             variant_columns: r,
@@ -5804,13 +5808,10 @@
                 read_pos_rank_sum: r.read_pos_rank_sum + ' Near 0 is better (means "no difference").',
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
-            Filter_panel: {
-                active: "All variants that are present in at least one of the selected individuals.",
-                dominant: "Dominant : variants that are present in all affected individuals, and absent in the non affected ones.",
-                recessive: "Recessive : variants homozygous in affected individuals, carried by their parents, but absent in non affected individuals.",
-                de_novo: "De novo : variants present in all affected individuals, but not carried by the parents.",
-                compound_het: "Compound heterozygous : pairs of variants affecting the same gene, one being carried by one parent, the second by the other parent, and both present in affected individuals.There may be several combinations of pairs; each affected sample carries at least one.",
-                x_linked: "X-linked: recessive impact variants present on chromosome X only. Carried by either affected sons and their mother, or by affected daughters (homozygous) and both their parents (and the father is affected). For dominant X-linked variants, use the 'dominant' scenario while filtering on 'chrX' in the Location search bar."
+            Filterspanel: {
+                Preset1: "Preset panel for germline",
+                Preset2: "Preset panel for Somatic variants which is low frequency in Normal sample.",
+                Preset3: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
             },
             impact_severity: {
                 HIGH: "HIGH impact: assumed to have a disruptive impact in the protein, probably causing protein truncation, loss of function, or triggering nonsense mediated decay.",
