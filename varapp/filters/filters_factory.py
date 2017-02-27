@@ -7,6 +7,7 @@ from varapp.filters.filters import FiltersCollection
 from varapp.filters.variant_filters import *
 from varapp.filters.genotype_filters import *
 from varapp.samples.samples_service import samples_selection_from_request
+from varapp.filters.Preset_filters import Preset1ForFinal, Preset2ForImportant, Preset3ForPathogenic
 import re
 
 
@@ -48,6 +49,8 @@ variant_filters_map = {
     'polyphen_score': PolyphenScoreFilter,
     'sift_pred': SiftPredFilter,
     'sift_score': SiftScoreFilter,
+    # self add
+    'dbsnp': SnpIDFilter,
 }
 for freqdb in FrequencyFilter.dbs:
     for pop in FrequencyFilter.pops[freqdb]:
@@ -64,6 +67,26 @@ genotype_filters_map = {
     #'x_linked': GenotypesFilterXLinked,
 }
 
+#Create a series of preset configurations for client.
+preset_filters_map = {
+    'Nothing': GenotypesFilterDoNothing,
+    'Default1_Final': Preset1ForFinal,
+    'Default2_Important': Preset2ForImportant,
+    'Default3_Pathogenic': Preset3ForPathogenic,
+}
+
+def preset_filter_factory(filter_name, db, samples_selection):
+    '''
+    From a string such as 'Default1_Final', call the property filters.
+    So it more like a set of filters.
+    :param filter_name:
+    :param db:
+    :param samples_selection:
+    :return: PresetFilter
+    '''
+    return preset_filters_map[filter_name](samples_selection, db=db)
+
+
 
 def genotype_filter_factory(filter_name, db, samples_selection):
     """From a string such as 'dominant', build the actual Genotype Filter
@@ -76,6 +99,8 @@ def variant_filter_factory(name, op, val, db=None, samples_selection=None):
     :rtype: VariantFilter
     """
     if name in variant_filters_map:
+        #with open('/home/liaoth/Desktop/debug.info','a+') as f1:
+        #    f1.write('name=%s,val=%s,op=%s,db=%s \n' % (str(name),str(val),str(op),str(db)))
         f = variant_filters_map[name](name=name, val=val, op=op, db=db)
     elif name == 'genotype':
         f = genotype_filter_factory(val, db, samples_selection)
@@ -83,7 +108,7 @@ def variant_filter_factory(name, op, val, db=None, samples_selection=None):
         raise ValueError("Unknown filtering option: '{}={}'.".format(name, val))
     return f
 
-def variant_filters_collection_factory(filters, samples_selection=None, db='default'):
+def variant_filters_collection_factory(filters: object, samples_selection: object = None, db: object = 'default') -> object:
     """Creates a list of Filter subclass instances from a list of (name,op,val) tuples.
     (name: filter name, op: '[<>=]', val: filter value).
     :param samples_selection: SamplesSelection, in case it had already been calculated.
@@ -92,9 +117,16 @@ def variant_filters_collection_factory(filters, samples_selection=None, db='defa
     """
     filters_collection = []
     for name, op, val in filters:
-        f = variant_filter_factory(name, op, val, db, samples_selection)
-        filters_collection.append(f)
-    return FiltersCollection(filters_collection)
+        if val in preset_filters_map:
+            filters_config=preset_filters_map[val]()
+            for name, op, val in filters_config:
+                f = variant_filter_factory(name, op, val, db, samples_selection)
+                filters_collection.append(f)
+            return FiltersCollection(filters_collection)
+        else:
+            f = variant_filter_factory(name, op, val, db, samples_selection)
+            filters_collection.append(f)
+        return FiltersCollection(filters_collection)
 
 def variant_filters_from_request(request, db, samples_selection=None):
     """Parse a GET Request and return a list of requested filters.
@@ -113,5 +145,7 @@ def variant_filters_from_request(request, db, samples_selection=None):
             filters.append((k, op, v))
         else:
             filters.append((f, '=', '1'))
+    with open('/home/liaoth/Desktop/debug.info','a+') as f1:
+        f1.write('name=%s \n' % str(filters))
     return variant_filters_collection_factory(filters, samples_selection, db)
 

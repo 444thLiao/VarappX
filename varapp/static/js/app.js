@@ -4294,7 +4294,7 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["active", "Preset1", "Preset2", "Preset3"]).map(function (n) {
+                var e = this, t = this.state.value, n = i.chain(["active", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
                     //help to desecribe the panel which is scenario before, but preset/filter_panel now.
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
@@ -5812,9 +5812,9 @@
             },
             Filterspanel: {
                 active: "All variants without any filtration",
-                Preset1: "Preset panel for germline",
-                Preset2: "Preset panel for Somatic variants which is low frequency in Normal sample.",
-                Preset3: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
+                Default1_Final: "Preset panel for germline",
+                Default2_Important: "Preset panel for Somatic variants which is low frequency in Normal sample.",
+                Default3_Pathogenic: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
             },
             impact_severity: {
                 HIGH: "HIGH impact: assumed to have a disruptive impact in the protein, probably causing protein truncation, loss of function, or triggering nonsense mediated decay.",
