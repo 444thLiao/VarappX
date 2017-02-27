@@ -3737,7 +3737,7 @@
         t.exports = {filters: p, filter_groups: c}
     }, {"../../constants/FilterConstants": 15}],
     29: [function (e, t, n) {
-        //Activate when filter in panel was chosen, it create a line to describe the filter you chosed.
+        //Activate when filter in panel was chosen, it create a small panel to describe the filter you chosed(maybe multiple).
         "use strict";
         var r = e("react"), o = e("../../actions/FilterActions"), i = e("../../constants/FilterConstants"), a = e("lodash"), s = e("../../utils/formatters"), l = e("react-bootstrap"), u = l.Glyphicon, c = {
             ">=": "≥",
@@ -4294,7 +4294,7 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["Preset1", "Preset2", "Preset3"]).map(function (n) {
+                var e = this, t = this.state.value, n = i.chain(["active", "Preset1", "Preset2", "Preset3"]).map(function (n) {
                     //help to desecribe the panel which is scenario before, but preset/filter_panel now.
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
@@ -4312,7 +4312,7 @@
                         category: "Filterspanel"
                     })), o.createElement("small", null, o.createElement("span", {className: "badge count pull-right"}, n.count))))
                 }).value();
-                return o.createElement("div", {className: "one-filter genotypes-filter"}, n)
+                    return o.createElement("div", {className: "one-filter genotypes-filter"}, n)
             }
         }), t.exports = r
     }, {
@@ -5811,6 +5811,7 @@
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
             Filterspanel: {
+                active: "All variants without any filtration",
                 Preset1: "Preset panel for germline",
                 Preset2: "Preset panel for Somatic variants which is low frequency in Normal sample.",
                 Preset3: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",

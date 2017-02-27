@@ -194,6 +194,7 @@ class ContinuousFilterNoneInclude(ContinuousFilter):
 
 # FILTER_CLASS_QUALITY
 
+
 class QualityFilter(ContinuousFilter):
     """Return variants with quality (VCF `QUAL` field) greater/lesser than a given value."""
     field_name = 'quality'

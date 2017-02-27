@@ -53,14 +53,15 @@ for freqdb in FrequencyFilter.dbs:
     for pop in FrequencyFilter.pops[freqdb]:
         variant_filters_map["aaf_{}_{}".format(freqdb,pop)] = FrequencyFilter(freqdb, pop)
 
+#FiltersPanels in Frontend preset filter classes define.
 genotype_filters_map = {
     'nothing': GenotypesFilterDoNothing,
-    'active': GenotypesFilterActive,
-    'dominant': GenotypesFilterDominant,
-    'recessive': GenotypesFilterRecessive,
-    'de_novo': GenotypesFilterDeNovo,
-    'compound_het': GenotypesFilterCompoundHeterozygous,
-    'x_linked': GenotypesFilterXLinked,
+    'active': GenotypesFilterDoNothing,
+    'Preset1': GenotypesFilterDominant,
+    'Preset2': GenotypesFilterRecessive,
+    'Preset3': GenotypesFilterDeNovo
+    #'compound_het': GenotypesFilterCompoundHeterozygous,
+    #'x_linked': GenotypesFilterXLinked,
 }
 
 
