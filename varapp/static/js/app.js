@@ -2645,8 +2645,7 @@
         };
         t.exports = r
     }, {}],
-    3: [function (e, t, n)
-        {
+    3: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = window.React = e("react-dom"), i = e("toastr"), a = e("lodash"), s = e("./modules/actions/AppActions"), l = e("./modules/actions/VariantActions"), u = e("./modules/actions/LoginActions"), c = e("./modules/react/VarappBrowserApp"), p = e("./modules/react/header/Header"), d = e("./modules/react/samples/SamplesSelection"), f = e("./modules/react/login/Login"), h = e("./modules/react/admin/Admin"), m = e("./modules/react/admin/UserAccount"), v = e("./modules/react/login/Signup"), y = e("./modules/react/login/ResetPassword"), b = e("./modules/react/login/PasswordChangeRequested"), g = e("./modules/react/login/PasswordHasBeenReset"), _ = e("./modules/react/login/AccountWillBeCreated"), E = e("./modules/stores/AppStore"), C = e("./modules/stores/LoginStore"), w = e("./modules/stores/VariantsLoaderStore"), x = e("./modules/stores/RouterStore"), T = e("./modules/constants/LoginConstants"), N = e("react-router"), S = N.Router, O = N.Route, P = N.IndexRoute, R = N.useRouterHistory, k = e("history").createHashHistory, D = R(k)({queryKey: !1}), A = e("./modules/utils/XHRUtils"), I = A.duplicateXHRKiller;
         I.addURI("variants", "stats");
@@ -3325,8 +3324,6 @@
             })
         }, t.exports = o
     }, {lodash: 300}],
-
-    // login message,contain the popup message component and the log-panel component of siderbar
     25: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("./filters/Filters"), i = e("./variants/Variants.js"), a = e("./samples/SamplesSummary"), s = e("./lookup/LookupPanel.js"), l = e("./logging/LogPanel"), u = r.createClass({
@@ -3355,7 +3352,6 @@
         "./variants/Variants.js": 62,
         react: 629
     }],
-    // admin-panel comonent
     26: [function (e, t, n) {
         "use strict";
         var r = e("react"), o = e("../../actions/LoginActions"), i = e("../../actions/AdminActions"), a = e("../../stores/AdminStore"), s = e("lodash"), l = e("../login/AuthenticatedComponent"), u = e("../utils/Confirm"), c = e("react-bootstrap"), p = c.Button, d = c.DropdownButton, f = c.MenuItem, h = r.createClass({
@@ -3473,7 +3469,6 @@
         react: 629,
         "react-bootstrap": 396
     }],
-    // user-account-panel component
     27: [function (e, t, n) {
         "use strict";
         var r = e("react"), o = e("../../actions/LoginActions"), i = e("../../stores/LoginStore"), a = e("lodash"), s = e("toastr"), l = e("../login/AuthenticatedComponent"), u = e("../login/FormComponents"), c = u.PasswordInput, p = e("react-bootstrap"), d = p.Button, f = {
@@ -3602,7 +3597,7 @@
         toastr: 632
     }],
     28: [function (e, t, n) {
-        var r = e("../../constants/FilterConstants"), o = "Scenario", i = "Frequency", a = "Quality", s = "Location", l = "Impact", u = "Pathogenicity", c = [o, i, a, l, u], p = [{
+        var r = e("../../constants/FilterConstants"), o = "FiltersPanel", i = "Frequency", a = "Quality", s = "Location", l = "Impact", u = "Pathogenicity", c = [o, i, a, l, u], p = [{
             group: s,
             name: "location",
             field: "location",
@@ -3671,7 +3666,7 @@
             type: r.FILTER_TYPE_CONTINUOUS
         }, {
             group: o,
-            name: "Scenario",
+            name: "FiltersPanel",
             field: "genotype",
             invisibleValue: "active",
             type: r.FILTER_TYPE_GENOTYPES
@@ -3742,6 +3737,8 @@
         t.exports = {filters: p, filter_groups: c}
     }, {"../../constants/FilterConstants": 15}],
     29: [function (e, t, n) {
+        //Activate when filter in panel was chosen, it create a small panel to describe the filter you chosed(maybe multiple).
+
         "use strict";
         var r = e("react"), o = e("../../actions/FilterActions"), i = e("../../constants/FilterConstants"), a = e("lodash"), s = e("../../utils/formatters"), l = e("react-bootstrap"), u = l.Glyphicon, c = {
             ">=": "≥",
@@ -3754,7 +3751,7 @@
                     return void 0 !== e.value && e.value !== e.nullValue && e.value !== e.invisibleValue
                 }).map(function (e) {
                     var t = e.value, n = e.op, r = "";
-                    return e.type === i.FILTER_TYPE_ENUM && (t = t.replace(/_/g, " "), t = t.split(",")), a.isArray(t) ? t.length > 1 ? (n = "∈", t = "(" + t.join(", ") + ")") : (n = "=", t = t[0]) : a.isBoolean(t) ? (t === !1 && (r = "not "), n = "", t = "") : isNaN(parseFloat(t)) ? void 0 === n && (n = ":") : e.type === i.FILTER_TYPE_FREQUENCY ? t = s.formatFrequencyPercent(t) : t % 1 !== 0 && (t = s.roundSignif(t, 3)), n = c[n] || n, [e.field, r + e.name.toLowerCase() + " " + n + " " + t]
+                    return e.type === i.FILTER_TYPE_ENUM && (t = t.replace(/_/g, " "), t = t.split(",")), a.isArray(t) ? t.length > 1 ? (n = "∈", t = "(" + t.join(", ") + ")") : (n = "=", t = t[0]) : a.isBoolean(t) ? (t === !1 && (r = "not "), n = "", t = "") : isNaN(parseFloat(t)) ? void 0 === n && (n = ":") : e.type === i.FILTER_TYPE_FREQUENCY ? t = s.formatFrequencyPercent(t) : t % 1 !== 0 && (t = s.roundSignif(t, 3)), n = c[n] || n, [e.field, r + e.name + " " + n + " " + t]
                 }).value()
             }, render: function () {
                 var e = this, t = this.fctFilterSummary(this.props.filters), n = a.map(t, function (t) {
@@ -3776,8 +3773,8 @@
         react: 629,
         "react-bootstrap": 396
     }],
-    // siderbar component,containing n-variants component,location-search component and filter-group-* component
     30: [function (e, t, n) {
+
         "use strict";
         var r = e("react"), o = e("react-addons-pure-render-mixin"), i = e("./kinds/TrueFalseAnyFilter"), a = e("./kinds/ContinuousValueFilter"), s = e("./kinds/EnumFilter"), l = e("./kinds/LocationFilter"), u = e("./kinds/GenotypesFilter"), c = e("./kinds/OneChoiceFilter"), p = e("./FilterSummary"), d = e("../../actions/FilterActions"), f = e("../../actions/VariantActions"), h = e("../../stores/FilterStore"), m = e("../../constants/FilterConstants"), v = e("lodash"), y = e("../login/AuthenticatedComponent"), b = e("../../utils/Api"), g = e("react-bootstrap"), _ = g.Button, E = g.Panel, C = g.Accordion, w = {};
         w[m.FILTER_TYPE_CONTINUOUS] = a, w[m.FILTER_TYPE_FREQUENCY] = a, w[m.FILTER_TYPE_ENUM] = s, w[m.FILTER_TYPE_ONE_CHOICE] = c, w[m.FILTER_TYPE_TRUE_FALSE_ANY] = i, w[m.FILTER_TYPE_GENOTYPES] = u;
@@ -3850,7 +3847,6 @@
                         defaultExpanded: 0 === t
                     }, n)
                 });
-
                 return r.createElement("div", {id: "filters-form"}, r.createElement("div", {id: "filter-toolbar"}, r.createElement(E, {
                     key: "n-variants",
                     id: "n-variants"
@@ -4299,7 +4295,10 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["active", "dominant", "recessive", "de_novo", "compound_het", "x_linked"]).map(function (n) {
+
+                var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
+                    //help to desecribe the panel which is scenario before, but preset/filter_panel now.
+
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
                         className: "genotypes-filter-choices",
@@ -4311,12 +4310,12 @@
                         value: n,
                         checked: i,
                         onChange: e.onChange
-                    }), o.createElement("span", null, " " + s.enumElem(n.replace("active", "none"))), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
+                    }), o.createElement("span", null, " " + s.enumElem(n)), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
                         name: n,
-                        category: "scenario"
+                        category: "Filterspanel"
                     })), o.createElement("small", null, o.createElement("span", {className: "badge count pull-right"}, n.count))))
                 }).value();
-                return o.createElement("div", {className: "one-filter genotypes-filter"}, n)
+                    return o.createElement("div", {className: "one-filter genotypes-filter"}, n)
             }
         }), t.exports = r
     }, {
@@ -4520,15 +4519,11 @@
         "../../tooltips/HelpTooltip.js": 53,
         react: 629
     }],
-    
-    // navbar component
     37: [function (e, t, n) {
         "use strict";
         var r = e("react"), o = e("lodash"), i = e("../../actions/AppActions"), a = e("../../actions/LoginActions"), s = e("../login/AuthenticatedComponent"), l = e("react-bootstrap"), u = l.DropdownButton, c = l.MenuItem, p = e("react-router"), d = p.Link, f = e("../utils/LinkToVarapp"), h = e("../../stores/LoginStore"), m = r.createClass({
             displayName: "Header",
             propTypes: {db: r.PropTypes.string},
-
-            // 导航栏左侧logo组件
             render: function () {
                 return r.createElement("div", {
                     className: "header",
@@ -4542,8 +4537,14 @@
                 }, r.createElement("img", {
                     height: "35",
                     alt: "SIB",
-                    src: "/static/images/gpz-lab.png",
-                    borderRadiux: "5px"
+                    src: "/static/images/sib_logo_medium.jpg"
+                }))), r.createElement("div", {className: "navbar-left header-brand-icon"}, r.createElement("a", {
+                    href: "http://www.chuv.ch/",
+                    target: "_blank"
+                }, r.createElement("img", {
+                    height: "35",
+                    alt: "CHUV",
+                    src: "/static/images/CHUV_logo2.png"
                 })))), r.createElement(f, {style: {textDecoration: "none"}}, r.createElement("h3", {className: "text-muted"}, "Vx browser")))
             }
         }), v = r.createClass({
@@ -4558,9 +4559,7 @@
             }, changeDB: function (e, t) {
                 var n = t.target.innerHTML;
                 i.changeDatabase(n), this.setState({db: n})
-            },
-            // 右侧栏右侧登录登出等部分
-            render: function () {
+            }, render: function () {
                 var e = this.state.user, t = this.props.db, n = r.createElement(d, {
                     id: "header-logout-link",
                     to: "/login",
@@ -4583,7 +4582,6 @@
                 return e ? r.createElement("ul", {className: "nav nav-pills pull-right"}, r.createElement("li", null, n)) : r.createElement("ul", {className: "nav nav-pills pull-right"})
             }
         }), y = s(r.createClass({
-            // 导入数据库部分
             render: function () {
                 var e = this, t = this.props.user, n = this.props.db, i = o.chain(t.databases).sortBy("name").map(function (t, o) {
                     return r.createElement(c, {
@@ -4989,7 +4987,6 @@
             PasswordInput: a
         }
     }, {react: 629}],
-    // login component
     43: [function (e, t, n) {
         "use strict";
         var r = e("react"), o = e("lodash"), i = e("toastr"), a = e("../../actions/LoginActions"), s = e("../../constants/LoginConstants"), l = e("../../constants/UtilsConstants");
@@ -5112,7 +5109,6 @@
         });
         t.exports = s
     }, {"../../utils/RestService": 78, react: 629, "react-router": 464}],
-    // reset password component
     46: [function (e, t, n) {
         "use strict";
         var r = e("react"), o = e("lodash"), i = e("../../utils/RestService"), a = e("toastr"), s = e("../../constants/UtilsConstants");
@@ -5174,8 +5170,6 @@
         "react-router": 464,
         toastr: 632
     }],
-
-    // signup component
     47: [function (e, t, n) {
         "use strict";
         var r = e("react"), o = e("lodash"), i = e("toastr"), a = e("../../constants/UtilsConstants"), s = e("../../actions/LoginActions");
@@ -5258,7 +5252,6 @@
         "react-router": 464,
         toastr: 632
     }],
-    // genotypes component of variants table
     48: [function (e, t, n) {
         "use strict";
         var r = e("react"), o = e("lodash"), i = e("../../stores/LookupStore"), a = e("../../stores/FilterStore"), s = e("../../stores/SamplesStore"), l = e("../../utils/formatters"), u = e("../../utils/Api"), c = e("../../actions/LookupActions"), p = e("../../constants/UtilsConstants"), d = e("react-bootstrap"), f = d.Panel, h = d.Table, m = d.Glyphicon, v = r.createClass({
@@ -5385,8 +5378,6 @@
         };
         t.exports = {columnDef: o}
     }, {}],
-
-    // variants-summary component and samples-selection-toolbar component and samples-table component and a back-button component
     50: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("jquery"), i = e("lodash"), a = e("../../stores/SamplesStore"), s = e("../../stores/VariantStore"), l = e("../../stores/FilterStore"), u = e("../../actions/SamplesActions"), c = e("./SamplesTable"), p = e("../login/AuthenticatedComponent"), d = e("react-dimensions"), f = e("../utils/Confirm"), h = e("react-bootstrap"), m = h.ButtonGroup, v = h.Button, y = h.Panel, b = h.Popover, g = h.OverlayTrigger, _ = e("../utils/LinkToVarapp"), E = e("../../constants/UtilsConstants"), C = E.ASC, w = r.createClass({
@@ -5416,7 +5407,6 @@
                 var e = a.getSamplesCollection().buildGroupStrings(), t = JSON.parse(localStorage.getItem("query")) || {};
                 t.samples = e, localStorage.setItem("query", JSON.stringify(t)), this.setState(this._stateFromStore())
             },
-            // samples-table Panel
             render: function () {
                 var e = this.props.user, t = this.props.db;
                 return e && !t ? r.createElement("p", {className: "login-message"}, "No database available for user " + e.username) : (c = d()(c), r.createElement("div", {className: "row"}, r.createElement("div", {
@@ -5442,10 +5432,7 @@
                 f.confirm("Restore default samples selection ?").then(function () {
                     u.fetchSamples(e.props.db)
                 })
-            },
-
-            // ssamples-selection-toolbar panel
-            render: function () {
+            }, render: function () {
                 var e = r.createElement(b, {id: "restore-samples-popover"}, "Restore default samples selection"), t = this.props.samples.summary(), n = this.props.samples.getSelectedSamples();
                 return r.createElement(y, {
                     id: "samples-selection-toolbar",
@@ -5540,9 +5527,7 @@
             }, _onDataChange: function () {
                 var e = s.isLoadingVariants() || s.isLoadingNextRowBatch();
                 this.setState({variantStats: s.data.stats, isLoading: e})
-            },
-            // variants-summary panel
-            render: function () {
+            }, render: function () {
                 var e = this.state.variantStats || {}, t = e.total_count ? r.createElement("span", {
                     id: "n-variants-summary",
                     className: "badge"
@@ -5570,7 +5555,6 @@
         "react-bootstrap": 396,
         "react-dimensions": 408
     }],
-    // SamplesSummary component
     51: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("lodash"), i = e("../../stores/SamplesStore"), a = e("../login/AuthenticatedComponent"), s = e("react-bootstrap"), l = s.Panel, u = e("react-router"), c = u.Link, p = r.createClass({
@@ -5768,6 +5752,7 @@
         "react-bootstrap": 396
     }],
     53: [function (e, t, n) {
+        // Help tp construct icon '?' in panel right.
         "use strict";
         var r = e("react"), o = e("./HelpTooltipDescriptions"), i = e("react-bootstrap"), a = i.Popover, s = i.OverlayTrigger, l = i.Glyphicon, u = r.createClass({
             displayName: "HelpTooltip",
@@ -5798,6 +5783,8 @@
         t.exports = {HelpTooltip: u, WithHelper: c}
     }, {"./HelpTooltipDescriptions": 54, react: 629, "react-bootstrap": 396}],
     54: [function (e, t, n) {
+        //Define left toggled panel for create "?" icon.
+        //When you create a ? icon, the attribute category need in this o.keys.
         "use strict";
         var r = e("../../../../resources/descriptions"), o = {
             variant_columns: r,
@@ -5826,13 +5813,12 @@
                 read_pos_rank_sum: r.read_pos_rank_sum + ' Near 0 is better (means "no difference").',
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
-            scenario: {
-                active: "All variants that are present in at least one of the selected individuals.",
-                dominant: "Dominant : variants that are present in all affected individuals, and absent in the non affected ones.",
-                recessive: "Recessive : variants homozygous in affected individuals, carried by their parents, but absent in non affected individuals.",
-                de_novo: "De novo : variants present in all affected individuals, but not carried by the parents.",
-                compound_het: "Compound heterozygous : pairs of variants affecting the same gene, one being carried by one parent, the second by the other parent, and both present in affected individuals.There may be several combinations of pairs; each affected sample carries at least one.",
-                x_linked: "X-linked: recessive impact variants present on chromosome X only. Carried by either affected sons and their mother, or by affected daughters (homozygous) and both their parents (and the father is affected). For dominant X-linked variants, use the 'dominant' scenario while filtering on 'chrX' in the Location search bar."
+
+            Filterspanel: {
+                none: "All variants without any filtration",
+                Default1_Final: "Preset panel for germline",
+                Default2_Important: "Preset panel for Somatic variants which is low frequency in Normal sample.",
+                Default3_Pathogenic: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
             },
             impact_severity: {
                 HIGH: "HIGH impact: assumed to have a disruptive impact in the protein, probably causing protein truncation, loss of function, or triggering nonsense mediated decay.",
@@ -5934,7 +5920,6 @@
         });
         t.exports = a
     }, {react: 629, "react-bootstrap": 396}],
-    // bookmark-button component and share url component of variants table
     58: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("../../stores/VariantStore"), i = e("lodash"), a = e("toastr"), s = e("../../utils/copyToClipboard.js"), l = e("../../utils/RestService"), u = e("../utils/Confirm"), c = e("../../utils/Api"), p = e("../../actions/AppActions"), d = e("../../constants/UtilsConstants"), f = e("react-bootstrap"), h = f.DropdownButton, m = f.Glyphicon, v = f.MenuItem, y = f.Button, b = f.ButtonGroup, g = f.Popover, _ = f.OverlayTrigger, E = f.Dropdown;
@@ -6055,7 +6040,6 @@
         "react-bootstrap": 396,
         toastr: 632
     }],
-    // select-columns-button component of variants-table
     59: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("lodash"), i = e("toastr"), a = e("../tooltips/HelpTooltipDescriptions"), s = e("../../actions/VariantActions.js"), l = e("./VariantColumnList.js"), u = e("../../constants/UtilsConstants"), c = e("react-bootstrap"), p = c.DropdownButton, d = c.Glyphicon, f = c.MenuItem, h = c.Popover, m = c.OverlayTrigger, v = l.COLUMN_DEF, y = a.variant_columns, b = 16;
@@ -6119,7 +6103,6 @@
         "react-bootstrap": 396,
         toastr: 632
     }],
-    // export-to-button componnent of variants-table
     60: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("lodash"), i = e("toastr"), a = e("../../utils/Api"), s = e("../../actions/VariantActions"), l = e("./VariantColumnList.js"), u = e("../../constants/UtilsConstants"), c = e("react-bootstrap"), p = c.Button, d = c.DropdownButton, f = c.ButtonGroup, h = c.MenuItem, m = c.Glyphicon, v = c.OverlayTrigger, y = c.Popover, b = c.ProgressBar, g = l.COLUMN_DEF, _ = {
@@ -6174,7 +6157,6 @@
         "react-bootstrap": 396,
         toastr: 632
     }],
-    // lineNr component
     61: [function (e, t, n) {
         var r = e("../../utils/formatters.js"), o = 80, i = 80, a = 60, s = {
             BASIC: "Basic",
@@ -6674,8 +6656,6 @@
         };
         t.exports = {COLUMN_DEF: l}
     }, {"../../utils/formatters.js": 81}],
-
-    // variants-table framework
     62: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("toastr"), i = e("../../stores/VariantStore"), a = e("../../actions/AppActions"), s = e("../../actions/LoginActions"), l = e("../../utils/Api"), u = e("../login/AuthenticatedComponent"), c = e("./VariantsTable.js"), p = e("./ColumnsSelection"), d = e("./Bookmarks"), f = e("./ExportTo"), h = e("../igv/IgvWindow"), m = e("../../constants/UtilsConstants");
@@ -6738,7 +6718,6 @@
         react: 629,
         toastr: 632
     }],
-    //  table-container of variants table
     63: [function (e, t, n) {
         "use strict";
         var r = window.React = e("react"), o = e("fixed-data-table"), i = o.Table, a = o.Column, s = e("lodash"), l = e("jquery"), u = e("react-dimensions"), c = e("../../utils/formatters.js"), p = e("../../utils/Api"), d = e("../../stores/SamplesStore"), f = e("../../stores/VariantStore"), h = e("../../actions/VariantActions.js"), m = e("./VariantColumnList"), v = e("../../constants/UtilsConstants"), y = e("../../constants/VariantConstants"), b = v.ASC, g = m.COLUMN_DEF, _ = r.createClass({
@@ -9549,7 +9528,6 @@
         "./joinClasses": 194,
         "./translateDOMPositionXY": 199
     }],
-    //  fixedDataTableCellLayout component and fixedDataTableCell component of samples-table
     157: [function (e, t, n) {
         "use strict";
         function r(e, t) {
@@ -9660,7 +9638,6 @@
         });
         t.exports = u
     }, {"./React": 178, "./cx": 188, "./joinClasses": 194}],
-    // fixedData Table Cell component of variants table
     159: [function (e, t, n) {
         "use strict";
         function r(e, t) {
@@ -10012,7 +9989,6 @@
         "./Locale": 176,
         "./React": 178
     }],
-
     167: [function (e, t, n) {
         "use strict";
         var r = Object.assign || function (e) {
