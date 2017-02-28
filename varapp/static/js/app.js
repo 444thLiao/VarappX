@@ -3738,6 +3738,7 @@
     }, {"../../constants/FilterConstants": 15}],
     29: [function (e, t, n) {
         //Activate when filter in panel was chosen, it create a small panel to describe the filter you chosed(maybe multiple).
+
         "use strict";
         var r = e("react"), o = e("../../actions/FilterActions"), i = e("../../constants/FilterConstants"), a = e("lodash"), s = e("../../utils/formatters"), l = e("react-bootstrap"), u = l.Glyphicon, c = {
             ">=": "≥",
@@ -4294,8 +4295,10 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["active", "Preset1", "Preset2", "Preset3"]).map(function (n) {
+
+                var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
                     //help to desecribe the panel which is scenario before, but preset/filter_panel now.
+
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
                         className: "genotypes-filter-choices",
@@ -4307,7 +4310,7 @@
                         value: n,
                         checked: i,
                         onChange: e.onChange
-                    }), o.createElement("span", null, " " + s.enumElem(n.replace("active", "none"))), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
+                    }), o.createElement("span", null, " " + s.enumElem(n)), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
                         name: n,
                         category: "Filterspanel"
                     })), o.createElement("small", null, o.createElement("span", {className: "badge count pull-right"}, n.count))))
@@ -5810,11 +5813,12 @@
                 read_pos_rank_sum: r.read_pos_rank_sum + ' Near 0 is better (means "no difference").',
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
+
             Filterspanel: {
-                active: "All variants without any filtration",
-                Preset1: "Preset panel for germline",
-                Preset2: "Preset panel for Somatic variants which is low frequency in Normal sample.",
-                Preset3: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
+                none: "All variants without any filtration",
+                Default1_Final: "Preset panel for germline",
+                Default2_Important: "Preset panel for Somatic variants which is low frequency in Normal sample.",
+                Default3_Pathogenic: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
             },
             impact_severity: {
                 HIGH: "HIGH impact: assumed to have a disruptive impact in the protein, probably causing protein truncation, loss of function, or triggering nonsense mediated decay.",

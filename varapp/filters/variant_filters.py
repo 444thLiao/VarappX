@@ -6,6 +6,7 @@ from django.db.models import Q
 from varapp.filters.filters import VariantFilter
 from varapp.annotation.location_service import LocationService
 from varapp.constants.filters import *
+from varapp.filters.Preset_filters import snp138Common_filters
 import operator
 from functools import reduce
 
@@ -36,6 +37,21 @@ class VariantIDFilter(VariantFilter):
     def django_condition(self):
         return Q(variant_id__in=tuple(self.val))
 
+class SnpIDFilter(VariantFilter):
+    field_name = 'dbsnp'
+
+    def parse_arg(self, arg):
+        return set(map(str, arg.split(',')))
+
+    def condition(self, variant):
+        return variant.dbsnp in self.val
+
+    def sql_condition(self):
+        s = 'dbsnp IN '+ str(tuple(self.val))
+        return s
+
+    def django_condition(self):
+        return Q(dbsnp__in=tuple(self.val))
 
 class BinaryFilter(VariantFilter):
     """Filters that expect a binary value."""
@@ -52,6 +68,8 @@ class BinaryFilter(VariantFilter):
 
     def django_condition(self):
         return Q(**{self.field_name: self.val})
+
+
 
 
 class EnumFilter(VariantFilter):
@@ -260,6 +278,10 @@ class DbsnpFilter(BinaryFilter):
     """Is this variant found in dbSNP? [0/1]"""
     field_name = 'in_dbsnp'
     filter_class = FILTER_CLASS_FREQUENCY
+
+class DbsnpCommonFilter(SnpIDFilter):
+    """Is this variant snp in dbsnp common?"""
+
 
 class ThousandGenomesFilter(BinaryFilter):
     """Is this variant in the 1000 genome project data (phase 3)? [0/1]."""
