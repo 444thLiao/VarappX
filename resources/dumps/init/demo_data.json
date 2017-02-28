@@ -49,7 +49,7 @@
         "model": "varapp.roles",
         "pk": 4,
         "fields": {
-            "name": "guest",
+            "name": "user",
             "rank": 4,
             "can_validate_user": 0,
             "can_delete_user": 0
@@ -74,7 +74,7 @@
             "username": "admin",
             "password": "abOV.DfJmdnYw",
             "salt": "abcdefghijklmnopqrs",
-            "email": "demo@demo.com",
+            "email": "13590239374@163.com",
             "code": "admin",
             "activation_code": null,
             "is_active": 1,
@@ -94,7 +94,7 @@
             "filename": "demo_mini.db",
             "location": "resources/db/",
             "hash": "e25b76e60082485158292750c239a2d255b742eb",
-            "description": "My first Gemini db",
+            "description": "Daemon db for test",
             "size": null,
             "is_active": 1,
             "parent_db_id": null
