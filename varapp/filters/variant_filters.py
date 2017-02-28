@@ -37,21 +37,6 @@ class VariantIDFilter(VariantFilter):
     def django_condition(self):
         return Q(variant_id__in=tuple(self.val))
 
-class SnpIDFilter(VariantFilter):
-    field_name = 'dbsnp'
-
-    def parse_arg(self, arg):
-        return set(map(str, arg.split(',')))
-
-    def condition(self, variant):
-        return variant.dbsnp in self.val
-
-    def sql_condition(self):
-        s = 'dbsnp IN '+ str(tuple(self.val))
-        return s
-
-    def django_condition(self):
-        return Q(dbsnp__in=tuple(self.val))
 
 class BinaryFilter(VariantFilter):
     """Filters that expect a binary value."""
@@ -68,8 +53,6 @@ class BinaryFilter(VariantFilter):
 
     def django_condition(self):
         return Q(**{self.field_name: self.val})
-
-
 
 
 class EnumFilter(VariantFilter):
@@ -211,7 +194,6 @@ class ContinuousFilterNoneInclude(ContinuousFilter):
 
 
 # FILTER_CLASS_QUALITY
-
 
 class QualityFilter(ContinuousFilter):
     """Return variants with quality (VCF `QUAL` field) greater/lesser than a given value."""

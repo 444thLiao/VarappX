@@ -49,8 +49,6 @@ variant_filters_map = {
     'polyphen_score': PolyphenScoreFilter,
     'sift_pred': SiftPredFilter,
     'sift_score': SiftScoreFilter,
-    # self add
-    'dbsnp': SnpIDFilter,
 }
 for freqdb in FrequencyFilter.dbs:
     for pop in FrequencyFilter.pops[freqdb]:
