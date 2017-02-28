@@ -3602,7 +3602,7 @@
         toastr: 632
     }],
     28: [function (e, t, n) {
-        var r = e("../../constants/FilterConstants"), o = "Scenario", i = "Frequency", a = "Quality", s = "Location", l = "Impact", u = "Pathogenicity", c = [o, i, a, l, u], p = [{
+        var r = e("../../constants/FilterConstants"), o = "FiltersPanel", i = "Frequency", a = "Quality", s = "Location", l = "Impact", u = "Pathogenicity", c = [o, i, a, l, u], p = [{
             group: s,
             name: "location",
             field: "location",
@@ -3671,7 +3671,7 @@
             type: r.FILTER_TYPE_CONTINUOUS
         }, {
             group: o,
-            name: "Scenario",
+            name: "FiltersPanel",
             field: "genotype",
             invisibleValue: "active",
             type: r.FILTER_TYPE_GENOTYPES
@@ -3742,6 +3742,7 @@
         t.exports = {filters: p, filter_groups: c}
     }, {"../../constants/FilterConstants": 15}],
     29: [function (e, t, n) {
+        //Activate when filter in panel was chosen, it create a small panel to describe the filter you chosed(maybe multiple).
         "use strict";
         var r = e("react"), o = e("../../actions/FilterActions"), i = e("../../constants/FilterConstants"), a = e("lodash"), s = e("../../utils/formatters"), l = e("react-bootstrap"), u = l.Glyphicon, c = {
             ">=": "≥",
@@ -3754,7 +3755,7 @@
                     return void 0 !== e.value && e.value !== e.nullValue && e.value !== e.invisibleValue
                 }).map(function (e) {
                     var t = e.value, n = e.op, r = "";
-                    return e.type === i.FILTER_TYPE_ENUM && (t = t.replace(/_/g, " "), t = t.split(",")), a.isArray(t) ? t.length > 1 ? (n = "∈", t = "(" + t.join(", ") + ")") : (n = "=", t = t[0]) : a.isBoolean(t) ? (t === !1 && (r = "not "), n = "", t = "") : isNaN(parseFloat(t)) ? void 0 === n && (n = ":") : e.type === i.FILTER_TYPE_FREQUENCY ? t = s.formatFrequencyPercent(t) : t % 1 !== 0 && (t = s.roundSignif(t, 3)), n = c[n] || n, [e.field, r + e.name.toLowerCase() + " " + n + " " + t]
+                    return e.type === i.FILTER_TYPE_ENUM && (t = t.replace(/_/g, " "), t = t.split(",")), a.isArray(t) ? t.length > 1 ? (n = "∈", t = "(" + t.join(", ") + ")") : (n = "=", t = t[0]) : a.isBoolean(t) ? (t === !1 && (r = "not "), n = "", t = "") : isNaN(parseFloat(t)) ? void 0 === n && (n = ":") : e.type === i.FILTER_TYPE_FREQUENCY ? t = s.formatFrequencyPercent(t) : t % 1 !== 0 && (t = s.roundSignif(t, 3)), n = c[n] || n, [e.field, r + e.name + " " + n + " " + t]
                 }).value()
             }, render: function () {
                 var e = this, t = this.fctFilterSummary(this.props.filters), n = a.map(t, function (t) {
@@ -4299,7 +4300,8 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["active", "dominant", "recessive", "de_novo", "compound_het", "x_linked"]).map(function (n) {
+                var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
+                     //help to desecribe the panel which is scenario before, but preset/filter_panel now.
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
                         className: "genotypes-filter-choices",
@@ -4311,9 +4313,9 @@
                         value: n,
                         checked: i,
                         onChange: e.onChange
-                    }), o.createElement("span", null, " " + s.enumElem(n.replace("active", "none"))), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
+                    }), o.createElement("span", null, " " + s.enumElem(n)), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
                         name: n,
-                        category: "scenario"
+                        category: "Filterspanel"
                     })), o.createElement("small", null, o.createElement("span", {className: "badge count pull-right"}, n.count))))
                 }).value();
                 return o.createElement("div", {className: "one-filter genotypes-filter"}, n)
@@ -5826,14 +5828,12 @@
                 read_pos_rank_sum: r.read_pos_rank_sum + ' Near 0 is better (means "no difference").',
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
-            scenario: {
-                active: "All variants that are present in at least one of the selected individuals.",
-                dominant: "Dominant : variants that are present in all affected individuals, and absent in the non affected ones.",
-                recessive: "Recessive : variants homozygous in affected individuals, carried by their parents, but absent in non affected individuals.",
-                de_novo: "De novo : variants present in all affected individuals, but not carried by the parents.",
-                compound_het: "Compound heterozygous : pairs of variants affecting the same gene, one being carried by one parent, the second by the other parent, and both present in affected individuals.There may be several combinations of pairs; each affected sample carries at least one.",
-                x_linked: "X-linked: recessive impact variants present on chromosome X only. Carried by either affected sons and their mother, or by affected daughters (homozygous) and both their parents (and the father is affected). For dominant X-linked variants, use the 'dominant' scenario while filtering on 'chrX' in the Location search bar."
-            },
+            Filterspanel: {
+                none: "All variants without any filtration",
+                Default1_Final: "Preset panel for germline",
+                Default2_Important: "Preset panel for Somatic variants which is low frequency in Normal sample.",
+                Default3_Pathogenic: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
+                },
             impact_severity: {
                 HIGH: "HIGH impact: assumed to have a disruptive impact in the protein, probably causing protein truncation, loss of function, or triggering nonsense mediated decay.",
                 MED: "MEDIUM impact: non-disruptive variant that might change the protein effectiveness.",
