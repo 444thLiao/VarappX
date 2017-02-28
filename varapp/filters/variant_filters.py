@@ -6,6 +6,7 @@ from django.db.models import Q
 from varapp.filters.filters import VariantFilter
 from varapp.annotation.location_service import LocationService
 from varapp.constants.filters import *
+
 import operator
 from functools import reduce
 
@@ -349,6 +350,8 @@ class ImpactSoFilter(EnumFilter):
 
 
 # FILTER_CLASS_PATHOGENICITY
+#class
+
 
 class CaddRawFilter(ContinuousFilterNoneInclude):
     """Raw CADD scores for scoring deleteriousness of SNV’s in the human genome."""
