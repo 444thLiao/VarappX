@@ -368,7 +368,7 @@ class ImpactSoFilter(EnumFilter):
 
 
 # FILTER_CLASS_PATHOGENICITY
-class 
+#class
 
 
 class CaddRawFilter(ContinuousFilterNoneInclude):
