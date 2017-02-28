@@ -1,20 +1,21 @@
 """
 Preset configurations.
 """
+from varapp.filters.filters_factory import *
 
 
 
-
-def Preset1ForFinal(filters: object = None, samples_selection: object = None, db: object = 'default'):
+def Preset1ForFinal(name, op, val, db=None, samples_selection=None):
     filters_config= [('pass_filter', '=', 'PASS'),
                      ('aaf_1kg_all', '<=', 0.01),
                      ('aaf_exac_all', '<=', 0.01),
-                     ('aaf_esp_all', '<=', 0.01
-                      )]
+                     ('aaf_esp_all', '<=', 0.01),
+                     ('in_dbsnp','=','true')
+                      ]
 
     return filters_config
 
-def Preset2ForImportant(filters: object = None, samples_selection: object = None, db: object = 'default'):
+def Preset2ForImportant(name, op, val, db=None, samples_selection=None):
     filters_config=(('pass_filter','=','PASS'),
                   ('aaf_1kg_all','<=',0.01),
                   ('aaf_exac_all','<=',0.01),
@@ -23,7 +24,7 @@ def Preset2ForImportant(filters: object = None, samples_selection: object = None
 
     return filters_config
 
-def Preset3ForPathogenic(filters: object = None, samples_selection: object = None, db: object = 'default'):
+def Preset3ForPathogenic(name, op, val, db=None, samples_selection=None):
     filters_config=(('pass_filter','=','PASS'),
                   ('aaf_1kg_all','<=',0.01),
                   ('aaf_exac_all','<=',0.01),

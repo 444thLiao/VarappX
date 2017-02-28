@@ -69,22 +69,12 @@ genotype_filters_map = {
 
 #Create a series of preset configurations for client.
 preset_filters_map = {
-    'Nothing': GenotypesFilterDoNothing,
+    'none': GenotypesFilterDoNothing,
     'Default1_Final': Preset1ForFinal,
     'Default2_Important': Preset2ForImportant,
     'Default3_Pathogenic': Preset3ForPathogenic,
 }
 
-def preset_filter_factory(filter_name, db, samples_selection):
-    '''
-    From a string such as 'Default1_Final', call the property filters.
-    So it more like a set of filters.
-    :param filter_name:
-    :param db:
-    :param samples_selection:
-    :return: PresetFilter
-    '''
-    return preset_filters_map[filter_name](samples_selection, db=db)
 
 
 
@@ -104,6 +94,8 @@ def variant_filter_factory(name, op, val, db=None, samples_selection=None):
         f = variant_filters_map[name](name=name, val=val, op=op, db=db)
     elif name == 'genotype':
         f = genotype_filter_factory(val, db, samples_selection)
+    elif name == 'genotype' and val in preset_filters_map:
+        f = preset_filters_map[val](samples_selection,db=db)
     else:
         raise ValueError("Unknown filtering option: '{}={}'.".format(name, val))
     return f
@@ -117,12 +109,17 @@ def variant_filters_collection_factory(filters: object, samples_selection: objec
     """
     filters_collection = []
     for name, op, val in filters:
+
         if val in preset_filters_map:
+            '''
             filters_config=preset_filters_map[val]()
             for name, op, val in filters_config:
                 f = variant_filter_factory(name, op, val, db, samples_selection)
                 filters_collection.append(f)
             return FiltersCollection(filters_collection)
+            '''
+            f = preset_filters_map[val](name, op, val, db, samples_selection)
+            filters_collection.append(f)
         else:
             f = variant_filter_factory(name, op, val, db, samples_selection)
             filters_collection.append(f)
@@ -146,6 +143,6 @@ def variant_filters_from_request(request, db, samples_selection=None):
         else:
             filters.append((f, '=', '1'))
     with open('/home/liaoth/Desktop/debug.info','a+') as f1:
-        f1.write('name=%s \n' % str(filters))
+        f1.write('filters=%s ; samples=%s \n' % (str(filters),str(samples_selection)))
     return variant_filters_collection_factory(filters, samples_selection, db)
 

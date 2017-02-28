@@ -4294,7 +4294,7 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["active", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
+                var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
                     //help to desecribe the panel which is scenario before, but preset/filter_panel now.
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
@@ -4307,7 +4307,7 @@
                         value: n,
                         checked: i,
                         onChange: e.onChange
-                    }), o.createElement("span", null, " " + s.enumElem(n.replace("active", "none"))), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
+                    }), o.createElement("span", null, " " + s.enumElem(n)), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
                         name: n,
                         category: "Filterspanel"
                     })), o.createElement("small", null, o.createElement("span", {className: "badge count pull-right"}, n.count))))
@@ -5811,7 +5811,7 @@
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
             Filterspanel: {
-                active: "All variants without any filtration",
+                none: "All variants without any filtration",
                 Default1_Final: "Preset panel for germline",
                 Default2_Important: "Preset panel for Somatic variants which is low frequency in Normal sample.",
                 Default3_Pathogenic: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
