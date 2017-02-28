@@ -3742,10 +3742,9 @@
         t.exports = {filters: p, filter_groups: c}
     }, {"../../constants/FilterConstants": 15}],
     29: [function (e, t, n) {
-<<<<<<< HEAD
+
         //Activate when filter in panel was chosen, it create a small panel to describe the filter you chosed(maybe multiple).
-=======
->>>>>>> f91e981495015010201e844ed09e37205bcce56e
+
         "use strict";
         var r = e("react"), o = e("../../actions/FilterActions"), i = e("../../constants/FilterConstants"), a = e("lodash"), s = e("../../utils/formatters"), l = e("react-bootstrap"), u = l.Glyphicon, c = {
             ">=": "≥",
@@ -4303,12 +4302,9 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-<<<<<<< HEAD
                 var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
                     //help to desecribe the panel which is scenario before, but preset/filter_panel now.
-=======
-                var e = this, t = this.state.value, n = i.chain(["active", "dominant", "recessive", "de_novo", "compound_het", "x_linked"]).map(function (n) {
->>>>>>> f91e981495015010201e844ed09e37205bcce56e
+
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
                         className: "genotypes-filter-choices",
@@ -5835,21 +5831,13 @@
                 read_pos_rank_sum: r.read_pos_rank_sum + ' Near 0 is better (means "no difference").',
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
-<<<<<<< HEAD
+
             Filterspanel: {
                 none: "All variants without any filtration",
                 Default1_Final: "Preset panel for germline",
                 Default2_Important: "Preset panel for Somatic variants which is low frequency in Normal sample.",
                 Default3_Pathogenic: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
-=======
-            scenario: {
-                active: "All variants that are present in at least one of the selected individuals.",
-                dominant: "Dominant : variants that are present in all affected individuals, and absent in the non affected ones.",
-                recessive: "Recessive : variants homozygous in affected individuals, carried by their parents, but absent in non affected individuals.",
-                de_novo: "De novo : variants present in all affected individuals, but not carried by the parents.",
-                compound_het: "Compound heterozygous : pairs of variants affecting the same gene, one being carried by one parent, the second by the other parent, and both present in affected individuals.There may be several combinations of pairs; each affected sample carries at least one.",
-                x_linked: "X-linked: recessive impact variants present on chromosome X only. Carried by either affected sons and their mother, or by affected daughters (homozygous) and both their parents (and the father is affected). For dominant X-linked variants, use the 'dominant' scenario while filtering on 'chrX' in the Location search bar."
->>>>>>> f91e981495015010201e844ed09e37205bcce56e
+
             },
             impact_severity: {
                 HIGH: "HIGH impact: assumed to have a disruptive impact in the protein, probably causing protein truncation, loss of function, or triggering nonsense mediated decay.",
