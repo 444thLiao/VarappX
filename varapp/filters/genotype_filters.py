@@ -193,7 +193,7 @@ class GenotypesFilter(Filter):
 class GenotypesFilterDoNothing(GenotypesFilter):
     """A filter that every variant passes anyway."""
     def __init__(self, ss:SamplesSelection, db=None):
-        super().__init__(ss, 'nothing', db=db)
+        super().__init__(ss, 'none', db=db)
 
     def build_conditions_array(self):
         assert self
