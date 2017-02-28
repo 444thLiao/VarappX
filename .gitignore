@@ -28,5 +28,3 @@ benchmark/stats
 benchmark/temp/
 benchmark/variants
 benchmark/variants_stats
-
-vx/*
