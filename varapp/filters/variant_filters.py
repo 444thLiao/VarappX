@@ -6,7 +6,7 @@ from django.db.models import Q
 from varapp.filters.filters import VariantFilter
 from varapp.annotation.location_service import LocationService
 from varapp.constants.filters import *
-from varapp.filters.Preset_filters import snp138Common_filters
+
 import operator
 from functools import reduce
 
@@ -279,10 +279,6 @@ class DbsnpFilter(BinaryFilter):
     field_name = 'in_dbsnp'
     filter_class = FILTER_CLASS_FREQUENCY
 
-class DbsnpCommonFilter(SnpIDFilter):
-    """Is this variant snp in dbsnp common?"""
-
-
 class ThousandGenomesFilter(BinaryFilter):
     """Is this variant in the 1000 genome project data (phase 3)? [0/1]."""
     field_name = 'in_1kg'
@@ -372,6 +368,8 @@ class ImpactSoFilter(EnumFilter):
 
 
 # FILTER_CLASS_PATHOGENICITY
+class 
+
 
 class CaddRawFilter(ContinuousFilterNoneInclude):
     """Raw CADD scores for scoring deleteriousness of SNV’s in the human genome."""

@@ -118,8 +118,8 @@ def variant_filters_collection_factory(filters: object, samples_selection: objec
                 filters_collection.append(f)
             return FiltersCollection(filters_collection)
             '''
-            f = preset_filters_map[val](name, op, val, db, samples_selection)
-            filters_collection.append(f)
+            fs = preset_filters_map[val](name, op, val, db, samples_selection)
+            filters_collection += fs
         else:
             f = variant_filter_factory(name, op, val, db, samples_selection)
             filters_collection.append(f)
