@@ -49,6 +49,9 @@ variant_filters_map = {
     'polyphen_score': PolyphenScoreFilter,
     'sift_pred': SiftPredFilter,
     'sift_score': SiftScoreFilter,
+    # self add.
+    'clinvar_sig': PathogenicFilter,
+    'is_splicing': IsSplicingFilter
 }
 for freqdb in FrequencyFilter.dbs:
     for pop in FrequencyFilter.pops[freqdb]:
@@ -61,8 +64,6 @@ genotype_filters_map = {
     'Preset1': GenotypesFilterDominant,
     'Preset2': GenotypesFilterRecessive,
     'Preset3': GenotypesFilterDeNovo
-    #'compound_het': GenotypesFilterCompoundHeterozygous,
-    #'x_linked': GenotypesFilterXLinked,
 }
 
 #Create a series of preset configurations for client.
@@ -107,17 +108,13 @@ def variant_filters_collection_factory(filters: object, samples_selection: objec
     """
     filters_collection = []
     for name, op, val in filters:
-
         if val in preset_filters_map:
-            '''
-            filters_config=preset_filters_map[val]()
-            for name, op, val in filters_config:
-                f = variant_filter_factory(name, op, val, db, samples_selection)
-                filters_collection.append(f)
-            return FiltersCollection(filters_collection)
-            '''
-            fs = preset_filters_map[val](name, op, val, db, samples_selection)
-            filters_collection += fs
+            if val == 'none':
+                fs = preset_filters_map[val](samples_selection, db = db)
+                filters_collection.append(fs)
+            else:
+                fs = preset_filters_map[val](name, op, val, db, samples_selection)
+                filters_collection += fs
         else:
             f = variant_filter_factory(name, op, val, db, samples_selection)
             filters_collection.append(f)
@@ -131,6 +128,8 @@ def variant_filters_from_request(request, db, samples_selection=None):
     """
     filters = []
     filterlist = request.GET.getlist('filter', [])
+    if filterlist == []:
+        filterlist = ['genotype=none']
     if samples_selection is None:
         samples_selection = samples_selection_from_request(request, db)
     for f in filterlist:
