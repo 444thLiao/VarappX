@@ -7,7 +7,7 @@ from varapp.filters.filters import FiltersCollection
 from varapp.filters.variant_filters import *
 from varapp.filters.genotype_filters import *
 from varapp.samples.samples_service import samples_selection_from_request
-from varapp.filters.Preset_filters import Preset1ForFinal, Preset2ForImportant, Preset3ForPathogenic
+from varapp.filters.Preset_filters import Preset1ForFinal, Preset2ForImportant, Preset3ForPathogenic,Preset1b_ForFinal
 import re
 
 
@@ -70,6 +70,7 @@ genotype_filters_map = {
 preset_filters_map = {
     'none': GenotypesFilterDoNothing,
     'Default1_Final': Preset1ForFinal,
+    'Default1b_Final': Preset1b_ForFinal,
     'Default2_Important': Preset2ForImportant,
     'Default3_Pathogenic': Preset3ForPathogenic,
 }
@@ -113,7 +114,7 @@ def variant_filters_collection_factory(filters: object, samples_selection: objec
                 fs = preset_filters_map[val](samples_selection, db = db)
                 filters_collection.append(fs)
             else:
-                fs = preset_filters_map[val](name, op, val, db, samples_selection)
+                fs = preset_filters_map[val](db=db)
                 filters_collection += fs
         else:
             f = variant_filter_factory(name, op, val, db, samples_selection)
