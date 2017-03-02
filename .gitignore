@@ -30,3 +30,5 @@ benchmark/variants
 benchmark/variants_stats
 
 vx/*
+
+resources/db/*

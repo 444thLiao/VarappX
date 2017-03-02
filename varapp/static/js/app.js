@@ -4300,7 +4300,7 @@
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
-                var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
+                var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final","Default1b_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
                      //help to desecribe the panel which is scenario before, but preset/filter_panel now.
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
@@ -5829,10 +5829,11 @@
                 strand_bias_odds_ratio: r.strand_bias_odds_ratio + " A high value is indicative of large bias."
             },
             Filterspanel: {
-                none: "All variants without any filtration",
-                Default1_Final: "Preset panel for germline",
-                Default2_Important: "Preset panel for Somatic variants which is low frequency in Normal sample.",
-                Default3_Pathogenic: "Preset panel for Somatic variants which is variant is in Tumore sample but not discovery in Normal sample.",
+                none: "All variants without any filtration.",
+                Default1_Final: "Final variants in our filtration.",
+                Default1b_Final: "Final variants in our filtration, because it is in splicing region.",
+                Default2_Important: "Important variants in our filtration ",
+                Default3_Pathogenic: "Variants have pathogenic data.",
                 },
             impact_severity: {
                 HIGH: "HIGH impact: assumed to have a disruptive impact in the protein, probably causing protein truncation, loss of function, or triggering nonsense mediated decay.",
