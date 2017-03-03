@@ -10,7 +10,7 @@ from varapp.stats.stats_service import stats_service
 from varapp.common.utils import timer
 from varapp.data_models.variants import Variant, expose_variant_full, annotate_variants
 from varapp.export import export
-from varapp.filters.filters_factory import variant_filters_from_request
+from varapp.filters.filters_factory import variant_filters_from_request,return_filters_to_view
 from varapp.filters.pagination import pagination_from_request
 from varapp.filters.sort import sort_from_request
 from varapp.samples.samples_service import samples_selection_from_request
@@ -34,6 +34,7 @@ class AllFilters:
         self.pg = pagination_from_request(request)
         self.ss = samples_selection_from_request(request, db)
         self.fc = variant_filters_from_request(request, db, self.ss)
+        self.filterconfig = return_filters_to_view(request, db, self.ss)
         self.stats = stats_service(db)
         self.request=request
 
@@ -42,9 +43,9 @@ class AllFilters:
         """Return a filtered and sorted variants collection."""
         # If the sorting field is in the db, use the db engine to sort.
         # Else, manage the case when the sorting field is added at expose time, after exposition...
-        with open('/home/liaoth/Desktop/debug.info', 'a+') as f1:
-            f1.write('main views,apply_all_filters\n\n:')
-            f1.write('self=%s ; request=%s \n' % (str(self), str(self.request.GET)))
+         #with open('/home/liaoth/Desktop/debug.info', 'a+') as f1:
+         #    f1.write('main views,apply_all_filters\n\n:')
+         #   f1.write('self=%s ; request=%s \n' % (str(self), str(self.request.GET)))
         var = self.fc.apply(db=self.db,
             sort_by=self.sort.key, reverse=self.sort.reverse,
             limit=self.pg.lim, offset=self.pg.off)
@@ -71,6 +72,8 @@ class AllFilters:
         response["filters"] = [str(x) for x in self.fc.list]
         response["nfound"] = stat.total_count
         response["stats"] = stat.expose()
+        response["FilterConfig"] = {}
+        # TODO? fill suitable format of filterconfig in order to send to frontend to construct views.
         return response
 
 def index(request):

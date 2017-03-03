@@ -161,8 +161,14 @@ class FiltersCollection:
         """Add a filter to the collection"""
         name = f.name
         if self._dict.get(name) is not None:
-            raise ValueError("Duplicate name '{}' in filter collection.".format(name))
-        self._dict[name] = f
+            if self._dict[name].val == f.val:
+                pass
+            else:
+                self._dict[name].val+=f.val
+                ###combined same filter but different choice rather than raise error.
+        else:
+            #raise ValueError("Duplicate name '{}' in filter collection.".format(name))
+            self._dict[name] = f
 
     def extend(self, filters_collection):
         """Extend the current collection with another.

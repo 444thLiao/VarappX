@@ -40,7 +40,7 @@ def Preset1ForFinal(db=None):
     for i, k, v in filters_config:
         f = ffac.variant_filters_map[i](name=i, val=v, op=k, db=db)
         f_collection.append(f)
-    return f_collection
+    return [f_collection,filters_config]
 
 
 def Preset1b_ForFinal(db=None):
@@ -50,7 +50,7 @@ def Preset1b_ForFinal(db=None):
     for i, k, v in filters_config:
         f = ffac.variant_filters_map[i](name=i, val=v, op=k, db=db)
         f_collection.append(f)
-    return f_collection
+    return [f_collection,filters_config]
 
 
 def Preset2ForImportant(db=None):
@@ -59,7 +59,7 @@ def Preset2ForImportant(db=None):
     for i, k, v in filters_config:
         f = ffac.variant_filters_map[i](name=i, val=v, op=k, db=db)
         f_collection.append(f)
-    return f_collection
+    return [f_collection,filters_config]
 
 
 def Preset3ForPathogenic(db=None):
@@ -68,4 +68,4 @@ def Preset3ForPathogenic(db=None):
     for i, k, v in filters_config:
         f = ffac.variant_filters_map[i](name=i, val=v, op=k, db=db)
         f_collection.append(f)
-    return f_collection
+    return [f_collection,filters_config]

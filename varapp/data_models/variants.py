@@ -24,7 +24,6 @@ class Variant(Variants):
     class Meta:
         proxy = True
 
-
 class VariantsCollection:
     """A list of variants - such as the result of evaluating a QuerySet,
     the result of a query (filtering) of the databse.

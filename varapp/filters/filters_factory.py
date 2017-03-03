@@ -115,11 +115,11 @@ def variant_filters_collection_factory(filters: object, samples_selection: objec
                 filters_collection.append(fs)
             else:
                 fs = preset_filters_map[val](db=db)
-                filters_collection += fs
+                filters_collection += fs[0]
         else:
             f = variant_filter_factory(name, op, val, db, samples_selection)
             filters_collection.append(f)
-        return FiltersCollection(filters_collection)
+    return FiltersCollection(filters_collection)
 
 def variant_filters_from_request(request, db, samples_selection=None):
     """Parse a GET Request and return a list of requested filters.
@@ -142,5 +142,32 @@ def variant_filters_from_request(request, db, samples_selection=None):
             filters.append((f, '=', '1'))
     with open('/home/liaoth/Desktop/debug.info','a+') as f1:
         f1.write('filters=%s ; samples=%s \n' % (str(filters),str(samples_selection)))
+
     return variant_filters_collection_factory(filters, samples_selection, db)
 
+
+def return_filters_to_view(request, db, samples_selection=None):
+    """
+    Parse a GET Request and return a list of requested filters to front_end in order to construct view.
+    :param request:
+    :return: list of tuple,each one is (name,op,val)
+    """
+    filters = []
+    filterlist = request.GET.getlist('filter', [])
+    for f in filterlist:
+        m = re.match(r"(\S+?)([<>=]{1,2})(.+)", f)
+        if m:
+            k, op, v = m.groups()
+            filters.append((k, op, v))
+        else:
+            filters.append((f, '=', '1'))
+    filter_description =[]
+    for name, op, val in filters:
+        if val in preset_filters_map:
+            if val == 'none':
+                fs = preset_filters_map[val](samples_selection, db = db)
+                filter_description.append(fs)
+            else:
+                fs = preset_filters_map[val](db=db)
+                filter_description += fs[1]
+    return filter_description
