@@ -4279,7 +4279,7 @@
         react: 629
     }],
     33: [function (e, t, n) {
-        "use strict";
+        "use strict"
         function r(e) {
             u.call(this, e), this.state = {value: e.value || "active"}, this.onChange = this.onChange.bind(this)
         }
@@ -4296,12 +4296,14 @@
         }), Object.defineProperty(r.prototype, "onChange", {
             writable: !0, configurable: !0, value: function (e) {
                 var t = e.target.value;
+                //console.log(window.location.href)
                 this.setState({value: t}), a.updateOneFilterValue(this.props.field, t)
+                    //define the action react when you press this button.
             }
         }), Object.defineProperty(r.prototype, "render", {
             writable: !0, configurable: !0, value: function () {
                 var e = this, t = this.state.value, n = i.chain(["none", "Default1_Final","Default1b_Final", "Default2_Important", "Default3_Pathogenic"]).map(function (n) {
-                     //help to desecribe the panel which is scenario before, but preset/filter_panel now.
+                    //help to desecribe the panel which is scenario before, but preset/filter_panel now.
                     var r = e.props.name + "-" + n, i = t === n;
                     return o.createElement("div", {
                         className: "genotypes-filter-choices",
@@ -4313,6 +4315,8 @@
                         value: n,
                         checked: i,
                         onChange: e.onChange
+                        // start a GET request to backend.
+
                     }), o.createElement("span", null, " " + s.enumElem(n)), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
                         name: n,
                         category: "Filterspanel"
@@ -5955,8 +5959,8 @@
                 var t = this.props.query || {}, n = !i.isEqual(e.samples, t.samples), r = e.order_by !== t.order_by || e.columns !== t.columns, o = !i.isEqual(e.filter, t.filter);
                 (n || r || o) && (this.setState({goToLinksDisabled: !0}), p.goToBookmark(e))
             }, setBookmark: function (e, t) {
-                var n = "varapp-demo.vital-it.ch" === window.location.hostname;
-                if (n && this.state.bookmarks.length >= 10)return void a.warning("This demo version does not allow to create more than 10 bookmarks. Remove some first.");
+                //var n = "varapp-demo.vital-it.ch" === window.location.hostname;
+                //if (n && this.state.bookmarks.length >= 10)return void a.warning("This demo version does not allow to create more than 10 bookmarks. Remove some first.");
                 var r = JSON.stringify(c.buildQueryDict()), o = Date.now();
                 l.setBookmark(this.props.db, r, o, e, t).then(function () {
                     a.success("Bookmark saved")
@@ -5973,17 +5977,22 @@
                     }), t.setState({bookmarks: n, showConfirm: !1})
                 })
             }, render: function () {
-                var e = this, t = i.map(this.state.bookmarks, function (t, n) {
+                    //console.log(this.state.bookmarks)
+                //t represent a object which is got the data from db, which is include bookmarks name, bookmarks urls, bookmarks description.
+                var e = this,
+
+                    t = i.map(this.state.bookmarks, function (t, n) {
                     var o = JSON.parse(t.url), i = new Date(t.time), a = ("0" + i.getDate()).slice(-2) + "-" + ("0" + (i.getMonth() + 1)).slice(-2) + "-" + i.getFullYear() + " " + ("0" + i.getHours()).slice(-2) + ":" + ("0" + i.getMinutes()).slice(-2);
                     return r.createElement(v, {
                         key: "bookmark-" + n,
                         disabled: e.state.goToLinksDisabled,
                         onClick: e.goTo.bind(null, o)
-                    }, r.createElement("div", {style: {display: "inline-block"}}, r.createElement("span", {className: "bookmark-desc"}, t.description + " - " + a)), r.createElement(y, {
+                    },r.createElement("div", {style: {display: "inline-block"}}, r.createElement("span", {className: "bookmark-desc"}, t.description + " - " + a)), r.createElement(y, {
                         bsStyle: "link",
                         onClick: e.deleteBookmark.bind(null, t)
                     }, r.createElement(m, {glyph: "remove", className: "remove-bookmark-button"})))
-                }), n = r.createElement(g, {id: "goto-bookmark-tooltip"}, "Load bookmark"), o = r.createElement(g, {id: "share-bookmark-tooltip"}, "Copy URL to clipboard");
+                }),
+                    n = r.createElement(g, {id: "goto-bookmark-tooltip"}, "Load bookmark"), o = r.createElement(g, {id: "share-bookmark-tooltip"}, "Copy URL to clipboard");
                 return r.createElement("span", {id: "bookmark-buttons"}, r.createElement(b, null, r.createElement(w, {setBookmark: this.setBookmark}), r.createElement(_, {
                     placement: "top",
                     overlay: n

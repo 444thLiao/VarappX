@@ -1,4 +1,3 @@
-
 from varapp.models.users import Bookmarks, VariantsDb, DbAccess
 
 def format_datetime(t):
