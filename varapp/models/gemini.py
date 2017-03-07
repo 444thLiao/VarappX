@@ -116,6 +116,7 @@ class Variants(models.Model):
     is_exonic = models.NullBooleanField()
     is_coding = models.NullBooleanField()
     is_lof = models.NullBooleanField()
+    is_splicing = models.NullBooleanField()
     codon_change = models.TextField(blank=True)
     aa_change = models.TextField(blank=True)
     impact = models.TextField(blank=True)

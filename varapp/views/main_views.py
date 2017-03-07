@@ -35,12 +35,16 @@ class AllFilters:
         self.ss = samples_selection_from_request(request, db)
         self.fc = variant_filters_from_request(request, db, self.ss)
         self.stats = stats_service(db)
+        self.request=request
 
     #@timer
     def apply_all_filters(self):
         """Return a filtered and sorted variants collection."""
         # If the sorting field is in the db, use the db engine to sort.
         # Else, manage the case when the sorting field is added at expose time, after exposition...
+        with open('/home/liaoth/Desktop/debug.info', 'a+') as f1:
+            f1.write('main views,apply_all_filters\n\n:')
+            f1.write('self=%s ; request=%s \n' % (str(self), str(self.request.GET)))
         var = self.fc.apply(db=self.db,
             sort_by=self.sort.key, reverse=self.sort.reverse,
             limit=self.pg.lim, offset=self.pg.off)

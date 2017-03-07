@@ -348,9 +348,17 @@ class ImpactSoFilter(EnumFilter):
     filter_class = FILTER_CLASS_IMPACT
     sensitive = True
 
+class IsSplicingFilter(BinaryFilter):
+    """Is this variant found in splicing position?"""
+    field_name = "is_splicing"
+    filter_class = FILTER_CLASS_IMPACT
 
 # FILTER_CLASS_PATHOGENICITY
-#class
+
+class PathogenicFilter(EnumFilter):
+    """Is this variant found in pathogenic db has pathogenic meaning? [0/1]"""
+    field_name = 'clinvar_sig'
+    filter_class = FILTER_CLASS_PATHOGENICITY
 
 
 class CaddRawFilter(ContinuousFilterNoneInclude):
