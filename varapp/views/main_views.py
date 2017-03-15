@@ -149,7 +149,7 @@ def export_variants(request, db, **kwargs):
         params = dict(request.GET)
         export.export_report(var, response, db, params)
     elif file_format == 'table':
-        params = dict(request.GET)
+        export.export_tsv(var, response, filters.ss, fields)
         #raise EnvironmentError
 
     return response

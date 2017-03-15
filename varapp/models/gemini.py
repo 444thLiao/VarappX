@@ -167,6 +167,9 @@ class Variants(models.Model):
 ### Try for somatic ###
 
     #allele_freq = models.FloatField(blank=True, null=True, db_column='AD')
+    allele_freq_raws = models.FloatField(blank=True, null=True, db_column='SAF')
+    allele_depths_raws = models.FloatField(blank=True, null=True, db_column='SAD')
+    allele_depths = models.FloatField(blank=True, null=True, db_column='AD')
 
 
 ### VEP custom fields ###

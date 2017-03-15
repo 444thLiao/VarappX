@@ -149,6 +149,9 @@ def expose_variant(v):
         "read_pos_rank_sum": v.read_pos_rank_sum,
         "strand_bias_odds_ratio": v.strand_bias_odds_ratio,
         "type": v.type,
+        "allele_depths":v.allele_depths,
+        "allele_freq_raws":v.allele_freq_raws,
+        "allele_depths_raws": v.allele_depths_raws,
     }
 
 def add_genotypes_selection(v_exposed, samples_selection):
