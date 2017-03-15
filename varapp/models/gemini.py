@@ -104,6 +104,7 @@ class Variants(models.Model):
     pass_filter = models.TextField(blank=True, db_column='filter')
     gts_blob = models.BinaryField(blank=True, null=True, db_column='gts')
     gt_types_blob = models.BinaryField(blank=True, null=True, db_column='gt_types')
+    gt_depths_blob = models.BinaryField(blank=True, null=True, db_column='gt_depths')
     in_dbsnp = models.NullBooleanField()
     dbsnp = models.TextField(blank=True, db_column='rs_ids')
     clinvar_sig = models.TextField(blank=True)
@@ -162,6 +163,11 @@ class Variants(models.Model):
     #GQ_MEAN = models.FloatField(blank=True, null=True)
     #GQ_STDDEV = models.FloatField(blank=True, null=True)
     #VQSLOD = models.FloatField(blank=True, null=True)
+
+### Try for somatic ###
+
+    #allele_freq = models.FloatField(blank=True, null=True, db_column='AD')
+
 
 ### VEP custom fields ###
 

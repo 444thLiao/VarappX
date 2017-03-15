@@ -4285,6 +4285,7 @@
         }
 
         var o = e("react"), i = e("lodash"), a = e("../../../actions/FilterActions"), s = e("../../../utils/formatters.js"), l = e("../../tooltips/HelpTooltip.js").HelpTooltip, u = o.Component;
+        var rc = e("./RestClientService")
         for (var c in u)u.hasOwnProperty(c) && (r[c] = u[c]);
         var p = null === u ? null : u.prototype;
         r.prototype = Object.create(p), r.prototype.constructor = r, r.__superConstructor__ = u, Object.defineProperty(r.prototype, "componentWillReceiveProps", {
@@ -4297,6 +4298,8 @@
             writable: !0, configurable: !0, value: function (e) {
                 var t = e.target.value;
                 //console.log(window.location.href)
+                var cache_rc = rc.get("/stats")
+                console.log(cache_rc)
                 this.setState({value: t}), a.updateOneFilterValue(this.props.field, t)
                     //define the action react when you press this button.
             }
@@ -4316,7 +4319,6 @@
                         checked: i,
                         onChange: e.onChange
                         // start a GET request to backend.
-
                     }), o.createElement("span", null, " " + s.enumElem(n)), o.createElement("span", {style: {paddingLeft: "5px"}}, o.createElement(l, {
                         name: n,
                         category: "Filterspanel"
@@ -4329,6 +4331,7 @@
         "../../../actions/FilterActions": 6,
         "../../../utils/formatters.js": 81,
         "../../tooltips/HelpTooltip.js": 53,
+        "./RestClientService": 77,
         lodash: 300,
         react: 629
     }],

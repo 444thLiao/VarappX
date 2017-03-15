@@ -163,11 +163,15 @@ class FiltersCollection:
         if self._dict.get(name) is not None:
             if self._dict[name].val == f.val:
                 pass
+            elif self._dict[name].val != f.val and type(f.val)!=bool:
+                self._dict[name].val += list(f.val)
             else:
-                self._dict[name].val+=f.val
+                self._dict[name].val = f.val
                 ###combined same filter but different choice rather than raise error.
         else:
             #raise ValueError("Duplicate name '{}' in filter collection.".format(name))
+            if type(f.val) == set:
+                f.val = list(f.val)
             self._dict[name] = f
 
     def extend(self, filters_collection):

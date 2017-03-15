@@ -3,7 +3,9 @@ import csv, datetime
 from varapp.models.gemini import Samples, Variants
 from varapp.common.gemini import *
 from varapp.data_models.variants import expose_variant_full, expose_variant, annotate_variants
+from varapp.filters.filters_factory import preset_filters_map
 
+import pickle
 
 def capitalize(x):
     return '' if len(x) == 0 else x[0].upper()+x[1:]
@@ -37,7 +39,6 @@ EXCEPT_FIELDS = {'position', }
 
 ### Export types
 
-
 def export_report(variants, target, db, params):
     """Generate a report indicating how the variants were called, filtered, and annotated.
     :param params: a dict looking like Request.GET:
@@ -45,15 +46,28 @@ def export_report(variants, target, db, params):
     """
     now = datetime.datetime.now()
     timestamp = now.strftime('%d/%m/%Y %H:%M:%S %p')
-    lines = ["Varapp report "+timestamp]
+    lines = ["VarappX report "+timestamp]
     # Stats on filtered variants
     lines.append("\nReturned {} variants out of {}.".format(len(variants), Variants.objects.using(db).count()))
     # Read GET params and prettify
     lines.append("\nFiltering parameters:")
     lines.append("---------------------")
+    storge_filters_config = {}
     for x in params.get('filter',[]):
         key,op,val = re.match(r"(\S+?)([<>=]{1,2})(.+)", x).groups()
-        lines.append("{} {} {}".format(COL_NAMES.get(key,capitalize(key)), op, val))
+        storge_filters_config[key] = [key,op,val]
+    if 'genotype' in storge_filters_config:
+        filters_config = preset_filters_map[val](db=db)[1]
+        lines.append("FiltersPanel: {}".format(val))
+        for key, op, val in filters_config:
+            lines.append(" "*8 + "{} {} {}".format(key, op, val))
+        storge_filters_config.pop('genotype')
+        lines.append("")
+    for f_key in storge_filters_config:
+        lines.append("Manual Filter selections:")
+        key,op,val = storge_filters_config[f_key]
+        lines.append(" "*8 + "{} {} {}".format(COL_NAMES.get(key,key), op, val))
+
     lines.append("\nSamples selection:",)
     lines.append("------------------")
     lines.append('\t'.join(['Family', 'Name', 'Father', 'Mother', 'Sex', 'Phenotype']))
@@ -69,6 +83,9 @@ def export_report(variants, target, db, params):
     # Fetch info from Gemini's vcf_header table
     gemini_version = get_gemini_version(db)
     vcf_header = fetch_vcf_header(db)
+    with open('/home/liaoth/Desktop/vcf_header','w') as f1:
+        f1.write(str(vcf_header))
+    #print(vcf_header)
     gatk_version = get_gatk_version(vcf_header)
     vep_version, vep_resources = get_vep_info(vcf_header)
     lines.extend([

@@ -39,7 +39,7 @@ def extract_variants_from_ids_bin_array(qs, bin_ids, ordered_qs_indices=None, li
     while k*B < limit:
         R = min(B, limit-(k*B))  # how many remain to extract
         ids_to_extract = itertools.islice(ordered_indices, offset, offset+R)
-        sub_qs = qs.filter(variant_id__in=ids_to_extract)
+        sub_qs = qs.filter(variant_id__in=ids_to_extract,)
         k += 1
         #variants = namedtuples(sub_qs)
         variants.extend(list(sub_qs))

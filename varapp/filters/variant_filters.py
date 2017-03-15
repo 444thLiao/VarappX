@@ -360,7 +360,6 @@ class PathogenicFilter(EnumFilter):
     field_name = 'clinvar_sig'
     filter_class = FILTER_CLASS_PATHOGENICITY
 
-
 class CaddRawFilter(ContinuousFilterNoneInclude):
     """Raw CADD scores for scoring deleteriousness of SNV’s in the human genome."""
     field_name = 'cadd_raw'
